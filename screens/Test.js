@@ -9,7 +9,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import * as ImagePicker from "expo-image-picker";
-import fireLogo from "../assets/fire.png";
+import fireLogo from "../assets/icons/fire.png";
 
 export default function Home() {
   const [selectedImage, setSelectedImage] = useState(null);
