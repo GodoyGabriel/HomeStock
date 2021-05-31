@@ -1,8 +1,10 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import { View, Text } from "react-native";
 import firebase from "../db/firebase";
+import FormUserData from '../components/FormUserData';
 
 export default function UserDetailScreen(props) {
+  const [user, setUser] = useState({})
   useEffect(() => {
     getUserById(props.route.params.userId);
   }, [props.route.params.userId]);
@@ -10,12 +12,10 @@ export default function UserDetailScreen(props) {
   const getUserById = async (id) => {
     const dbRef = firebase.db.collection("users").doc(id);
     const doc = await dbRef.get();
-    const user = doc.data();
-    console.log(`user`, user);
+    const userDB = doc.data();
+    setUser(userDB);
   };
   return (
-    <View>
-      <Text>UserDetailScreen</Text>
-    </View>
+    <FormUserData existUser={user}/>
   );
 }

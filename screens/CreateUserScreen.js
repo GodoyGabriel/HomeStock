@@ -14,5 +14,5 @@ export default function CreateUserScreen(props) {
     }
   };
 
-  return <FormUserData userData={saveNewUser} />;
+  return <FormUserData saveUser={saveNewUser} />;
 }

@@ -1,48 +1,52 @@
-import React, { useState } from "react";
-import {
-  View,
-  Button,
-  TextInput,
-  ScrollView,
-  StyleSheet,
-} from "react-native";
+import React, { useState, useEffect } from "react";
+import { View, Button, TextInput, ScrollView, StyleSheet } from "react-native";
 
 export default function FormUserData(props) {
+  const { existUser } = props;
   const [state, setState] = useState({
-    name: "",
-    email: "",
-    phone: "",
+    name: existUser ? existUser.name : "",
+    email: existUser ? existUser.email : "",
+    phone: existUser ? existUser.phone : "",
   });
+
+  useEffect(() => {
+    if (existUser) {
+      setState(existUser);
+    }
+  }, [existUser]);
 
   const changeText = (name, value) => {
     setState({ ...state, [name]: value });
   };
 
   const submitForm = () => {
-    if(state.name === '' || state.email === '' || state.phone === ''){
+    if (state.name === "" || state.email === "" || state.phone === "") {
       Alert.alert("Completa todos los campos");
     } else {
-      props.userData(state)
+      props.saveUser(state);
     }
-  }
+  };
 
   return (
     <ScrollView style={styles.container}>
       <View style={styles.inputGroup}>
         <TextInput
           placeholder="Name user"
+          value={state.name}
           onChangeText={(value) => changeText("name", value)}
         />
       </View>
       <View style={styles.inputGroup}>
         <TextInput
           placeholder="Email user"
+          value={state.email}
           onChangeText={(value) => changeText("email", value)}
         />
       </View>
       <View style={styles.inputGroup}>
         <TextInput
           placeholder="Phone user"
+          value={state.phone}
           onChangeText={(value) => changeText("phone", value)}
         />
       </View>
