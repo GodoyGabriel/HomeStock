@@ -7,9 +7,11 @@ import Home from "./screens/Home";
 import CreateUserScreen from "./screens/CreateUserScreen";
 import UserDetailScreen from "./screens/UserDetailScreen";
 import UsersList from "./screens/UsersList";
-import { LogBox } from 'react-native';
+import { Platform, LogBox } from "react-native";
 
-LogBox.ignoreLogs(['Setting a timer for a long period of time'])
+if(Platform.OS === 'android' || Platform.OS === 'ios'){
+  LogBox.ignoreLogs(['Setting a timer for a long period of time'])
+}
 
 const Stack = createStackNavigator();
 
