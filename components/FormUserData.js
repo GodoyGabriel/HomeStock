@@ -51,8 +51,17 @@ export default function FormUserData(props) {
         />
       </View>
       <View>
-        <Button title="Save user" onPress={submitForm} />
+        <Button
+          title={existUser ? "Update user" : "Save user"}
+          color="#19AC52"
+          onPress={submitForm}
+        />
       </View>
+      {existUser && (
+        <View>
+          <Button title="Delete user" color="#E37399" onPress={submitForm} />
+        </View>
+      )}
     </ScrollView>
   );
 }
